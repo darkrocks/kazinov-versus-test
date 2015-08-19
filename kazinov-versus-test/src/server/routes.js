@@ -1,3 +1,4 @@
+var path = require('path');
 var controller = require('./controller');
 
 /**
@@ -6,6 +7,10 @@ var controller = require('./controller');
  */
 function configure(app) {
     app.get('/api/:nameUrl', controller.findByNameUrl);
+
+    app.get('*', function (req, res) {
+        res.sendFile(path.join(__dirname, '../client', 'index.html'));
+    });
 }
 
 module.exports = {
