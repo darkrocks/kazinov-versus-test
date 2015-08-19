@@ -1,0 +1,12 @@
+<div style="margin-left: 20px;">
+    <div>
+        - {{viewModel.name}}
+    </div>
+    <div ng-repeat="property in viewModel.properties">
+        {{property.name}}: {{property.value}}
+    </div>
+    <div ng-repeat="embeddedObject in viewModel.embeddedObjects">
+        <object-details object="embeddedObject"></object-details>
+    </div>
+</div>
+
