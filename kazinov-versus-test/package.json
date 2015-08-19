@@ -2,6 +2,7 @@
   "name": "kazinov-versus-test",
   "version": "0.0.1",
   "devDependencies": {
+    "bluebird": "^2.9.34",
     "grunt": "^0.4.5",
     "grunt-contrib-jshint": "^0.11.2",
     "grunt-contrib-watch": "^0.6.1",
