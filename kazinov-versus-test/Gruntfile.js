@@ -1,6 +1,7 @@
 module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-simple-mocha');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
 
     grunt.initConfig({
         watch: {
@@ -9,7 +10,7 @@ module.exports = function(grunt) {
                     'api/**/*.js',
                     'data/**/*.js'
                 ],
-                tasks: ['simplemocha:server']
+                tasks: ['jshint:all', 'simplemocha:server']
             }
         },
         simplemocha: {
@@ -18,6 +19,20 @@ module.exports = function(grunt) {
                     'api/**/*.test.js',
                     'data/**/*.test.js'
                 ]
+            }
+        },
+        jshint: {
+            options: grunt.file.readJSON('.jshintrc'),
+            'all': {
+                files: {
+                    src: [
+                        '**/*.js',
+                        '!data/database.js',
+                        '!**/bower_components/**',
+                        '!**/build/**',
+                        '!**/node_modules/**'
+                    ]
+                }
             }
         }
     });
