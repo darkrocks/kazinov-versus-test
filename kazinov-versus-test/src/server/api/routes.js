@@ -5,7 +5,7 @@ var controller = require('./controller');
  * @param app - The application.
  */
 function configure(app) {
-    app.get('/:nameUrl', controller.findByNameUrl);
+    app.get('/api/:nameUrl', controller.findByNameUrl);
 }
 
 module.exports = {

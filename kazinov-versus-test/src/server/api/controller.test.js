@@ -15,13 +15,13 @@ describe('module: controller', function () {
     describe('method: findByNameUrl()', function () {
         it('should return 200 response for nameUrl android-4-4-kitkat', function () {
             return request(app)
-                .get('/android-4-4-kitkat')
+                .get('/api/android-4-4-kitkat')
                 .expect(200);
         });
 
         it('should return proper data for nameUrl android-4-4-kitkat', function (done) {
             return request(app)
-                .get('/android-4-4-kitkat')
+                .get('/api/android-4-4-kitkat')
                 .then(function (res) {
                     assert.equal(JSON.stringify(res.body), JSON.stringify({
                         name: 'Android 4.4 KitKat',
@@ -42,7 +42,7 @@ describe('module: controller', function () {
 
         it('should return proper data for nameUrl nexus-5', function (done) {
             return request(app)
-                .get('/nexus-5')
+                .get('/api/nexus-5')
                 .then(function (res) {
                     assert.equal(res.body.name, 'Nexus 5');
                     assert.ok(!res.body['name_url']);
@@ -99,7 +99,7 @@ describe('module: controller', function () {
 
         it('should return 404 response for not existed nameUrl', function () {
             return request(app)
-                .get('/unknows_name_url')
+                .get('/api/unknows_name_url')
                 .expect(404);
         });
     });
