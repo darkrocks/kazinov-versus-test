@@ -1,14 +1,29 @@
+var express = require('express');
 var assert = require('assert');
-var repository = require('./repository');
-var errors = require('../lib/errors');
+var request = require('supertest-as-promised');
+var routes = require('./routes');
 
-describe('module: repository', function () {
+function setupTest() {
+    var app = express();
+    routes.configure(app);
+    return app;
+}
+
+var app = setupTest();
+
+describe('module: controller', function () {
     describe('method: findByNameUrl()', function () {
+        it('should return 200 response for nameUrl android-4-4-kitkat', function () {
+            return request(app)
+                .get('/android-4-4-kitkat')
+                .expect(200);
+        });
 
-        it('should return proper data for name url', function (done) {
-            repository.findByNameUrl('android-4-4-kitkat')
-                .then(function (data) {
-                    assert.equal(JSON.stringify(data), JSON.stringify({
+        it('should return proper data for nameUrl android-4-4-kitkat', function (done) {
+            return request(app)
+                .get('/android-4-4-kitkat')
+                .then(function (res) {
+                    assert.equal(JSON.stringify(res.body), JSON.stringify({
                         name: 'Android 4.4 KitKat',
                         properties: {
                             '4k': true,
@@ -25,21 +40,22 @@ describe('module: repository', function () {
                 .catch(done);
         });
 
-        it('should return proper data for name url 2', function (done) {
-            repository.findByNameUrl('nexus-5')
-                .then(function (data) {
-                    assert.equal(data.name, 'Nexus 5');
-                    assert.ok(!data['name_url']);
-                    assert.equal(data.properties['compass'], true);
-                    assert.equal(data.properties['clock_speed'], 2.3);
-                    assert.equal(data.properties['cores'], 4);
-                    assert.equal(data.properties['front_camera_megapixel'], '1.3 MP');
-                    assert.equal(data.properties['gps'], true);
-                    assert.equal(data.properties['ram'], '2 GB');
-                    assert.equal(data.properties['weight'], '130 g');
-                    assert.equal(data.embeddedObjects.length, 2);
+        it('should return proper data for nameUrl nexus-5', function (done) {
+            return request(app)
+                .get('/nexus-5')
+                .then(function (res) {
+                    assert.equal(res.body.name, 'Nexus 5');
+                    assert.ok(!res.body['name_url']);
+                    assert.equal(res.body.properties['compass'], true);
+                    assert.equal(res.body.properties['clock_speed'], 2.3);
+                    assert.equal(res.body.properties['cores'], 4);
+                    assert.equal(res.body.properties['front_camera_megapixel'], '1.3 MP');
+                    assert.equal(res.body.properties['gps'], true);
+                    assert.equal(res.body.properties['ram'], '2 GB');
+                    assert.equal(res.body.properties['weight'], '130 g');
+                    assert.equal(res.body.embeddedObjects.length, 2);
 
-                    var androidEmbededObject = data.embeddedObjects.filter(function(o) {
+                    var androidEmbededObject = res.body.embeddedObjects.filter(function(o) {
                         return o.name === 'Android 4.4 KitKat';
                     })[0];
                     assert.equal(androidEmbededObject.name, 'Android 4.4 KitKat');
@@ -51,7 +67,7 @@ describe('module: repository', function () {
                     assert.equal(androidEmbededObject.properties['customize_notifications'], true);
                     assert.equal(androidEmbededObject.properties['offline_voice_recognition'], true);
 
-                    var qualcommSnapdragon800EmbededObject = data.embeddedObjects.filter(function(o) {
+                    var qualcommSnapdragon800EmbededObject = res.body.embeddedObjects.filter(function(o) {
                         return o.name === 'Qualcomm Snapdragon 800 MSM8974AA v2';
                     })[0];
                     assert.equal(qualcommSnapdragon800EmbededObject.name, 'Qualcomm Snapdragon 800 MSM8974AA v2');
@@ -76,21 +92,15 @@ describe('module: repository', function () {
                     assert.ok(!qualcommKrait400EmbededObject['name_url']);
                     assert.equal(qualcommKrait400EmbededObject.properties['virtualization'], true);
                     assert.equal(qualcommKrait400EmbededObject.properties['nxbit'], true);
-
                     done();
                 })
                 .catch(done);
         });
 
-        it('should return RecordNotFound error in an object doesnt exist', function (done) {
-            repository.findByNameUrl('unexisted_name_url')
-                .then(function () {
-                    done('expected an error');
-                })
-                .catch(errors.RecordNotFound, function (err) {
-                    assert.equal(err.message, 'Record not found');
-                    done();
-                });
+        it('should return 404 response for not existed nameUrl', function () {
+            return request(app)
+                .get('/unknows_name_url')
+                .expect(404);
         });
     });
 });

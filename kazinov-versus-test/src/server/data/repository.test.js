@@ -5,7 +5,7 @@ var errors = require('../../lib/errors');
 describe('module: repository', function () {
     describe('method: findByNameUrl()', function () {
 
-        it('should return proper data for name url', function (done) {
+        it('should return proper data for nameUrl android-4-4-kitkat', function (done) {
             repository.findByNameUrl('android-4-4-kitkat')
                 .then(function (data) {
                     assert.equal(JSON.stringify(data), JSON.stringify({
@@ -25,7 +25,7 @@ describe('module: repository', function () {
                 .catch(done);
         });
 
-        it('should return proper data for name url 2', function (done) {
+        it('should return proper data for nameUrl nexus-5', function (done) {
             repository.findByNameUrl('nexus-5')
                 .then(function (data) {
                     assert.equal(data.name, 'Nexus 5');

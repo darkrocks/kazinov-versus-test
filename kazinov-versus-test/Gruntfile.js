@@ -7,8 +7,7 @@ module.exports = function(grunt) {
         watch: {
             server: {
                 files: [
-                    'api/**/*.js',
-                    'data/**/*.js'
+                    'src/server/**/*.js'
                 ],
                 tasks: ['jshint:all', 'simplemocha:server']
             }
@@ -16,8 +15,7 @@ module.exports = function(grunt) {
         simplemocha: {
             server: {
                 src: [
-                    'api/**/*.test.js',
-                    'data/**/*.test.js'
+                    'src/server/**/*.test.js'
                 ]
             }
         },
@@ -27,7 +25,7 @@ module.exports = function(grunt) {
                 files: {
                     src: [
                         '**/*.js',
-                        '!data/database.js',
+                        '!src/server/data/database.js',
                         '!**/bower_components/**',
                         '!**/build/**',
                         '!**/node_modules/**'
