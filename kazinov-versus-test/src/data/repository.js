@@ -1,6 +1,6 @@
 var Promise = require('bluebird');
 var db = Promise.promisifyAll(require('./database.js'));
-var errors = require('../../lib/errors');
+var errors = require('../lib/errors');
 
 module.exports = {
     /**

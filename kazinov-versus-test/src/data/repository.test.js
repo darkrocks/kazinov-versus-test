@@ -1,6 +1,6 @@
 var assert = require('assert');
 var repository = require('./repository');
-var errors = require('../../lib/errors');
+var errors = require('../lib/errors');
 
 describe('module: repository', function () {
     describe('method: findByNameUrl()', function () {

@@ -1,5 +1,5 @@
 var repository = require('../data/repository');
-var errors = require('../../lib/errors');
+var errors = require('../lib/errors/index');
 
 module.exports = {
     findByNameUrl: function (request, response) {
