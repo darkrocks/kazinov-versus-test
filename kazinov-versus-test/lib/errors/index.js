@@ -1,3 +1,4 @@
 module.exports = {
-    RecordNotFound: require('./RecordNotFound')
+    RecordNotFound: require('./RecordNotFound'),
+    InvalidData: require('./InvalidData')
 };

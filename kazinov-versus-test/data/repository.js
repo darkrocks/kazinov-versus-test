@@ -36,6 +36,16 @@ module.exports = {
  * @returns {Promise}
  */
 function transform(object) {
+    if (!object.name) {
+        return Promise.reject(new errors.InvalidData('Name field is required'));
+    }
+
+    if (!object.properties) {
+        return Promise.resolve({
+            name: object.name
+        });
+    }
+
     var result = {
         name: object.name,
         properties: {},

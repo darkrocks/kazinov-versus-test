@@ -2,7 +2,10 @@ var util = require('util');
 
 function RecordNotFound(message) {
     this.name = this.constructor.name;
-    this.message = message || 'Record not found';
+    this.message = 'Record not found';
+    if (message) {
+        this.message += ': ' + message;
+    }
 }
 
 util.inherits(RecordNotFound, Error);
