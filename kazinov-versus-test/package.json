@@ -1,15 +1,19 @@
 {
-  "name": "kazinov-versus-test",
+  "name": "kazinov-versus-task",
   "version": "0.0.1",
   "devDependencies": {
-    "bluebird": "^2.9.34",
-    "body-parser": "^1.13.3",
-    "express": "^4.13.3",
+    "bower": "^1.4.1",
     "grunt": "^0.4.5",
     "grunt-contrib-jshint": "^0.11.2",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-simple-mocha": "^0.4.0",
     "supertest": "^1.0.1",
     "supertest-as-promised": "^2.0.2"
+  },
+  "dependencies": {
+    "bluebird": "^2.9.34",
+    "body-parser": "^1.13.3",
+    "bootstrap": "^3.3.5",
+    "express": "^4.13.3"
   }
 }
