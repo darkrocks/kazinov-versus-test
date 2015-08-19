@@ -1,12 +1,13 @@
-<div style="margin-left: 20px;">
-    <div>
-        - {{viewModel.name}}
+<div class="media">
+    <div class="media-left">
     </div>
-    <div ng-repeat="property in viewModel.properties">
-        {{property.name}}: {{property.value}}
-    </div>
-    <div ng-repeat="embeddedObject in viewModel.embeddedObjects">
-        <object-details object="embeddedObject"></object-details>
+    <div class="media-body">
+        <h4 class="media-heading">{{viewModel.name}}</h4>
+        <div ng-repeat="property in viewModel.properties">
+            {{property.name}}: {{property.value}}
+        </div>
+        <div style="margin-top: 10px;" ng-repeat="embeddedObject in viewModel.embeddedObjects">
+            <object-details object="embeddedObject"></object-details>
+        </div>
     </div>
 </div>
-
