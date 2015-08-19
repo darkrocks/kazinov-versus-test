@@ -1,6 +1,8 @@
 (function() {
 
-    function config($stateProvider) {
+    function config($locationProvider, $urlRouterProvider, $stateProvider) {
+        $locationProvider.html5Mode(true);
+        $urlRouterProvider.otherwise('/');
         $stateProvider
             .state('object-details', {
                 url: '/{nameUrl}',
@@ -10,11 +12,13 @@
     }
 
     config.$inject = [
+        '$locationProvider',
+        '$urlRouterProvider',
         '$stateProvider'
     ];
 
     angular
-        .module('object-details')
+        .module('kazinov-versus-task')
         .config(config);
 
 })();

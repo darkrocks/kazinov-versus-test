@@ -1,8 +1,9 @@
 (function() {
-    angular.module('object-details')
+    angular
+        .module('kazinov-versus-task')
         .directive('objectDetails', objectDetailsDirective)
         .controller('objectDetailsDirectiveController', ObjectDetailsDirectiveController);
-    
+
     function objectDetailsDirective($compile) {
         return {
             restrict: 'AEC',
@@ -32,7 +33,12 @@
     ];
 
     function ObjectDetailsDirectiveController($scope) {
-        $scope.viewModel = this.objectToViewModel($scope.object);
+        var that = this;
+        $scope.$watch('object', function() {
+            if ($scope.object) {
+                $scope.viewModel = that.objectToViewModel($scope.object);
+            }
+        });
     }
 
     ObjectDetailsDirectiveController.prototype.objectToViewModel = function (object) {
